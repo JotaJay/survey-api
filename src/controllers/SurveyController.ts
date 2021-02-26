@@ -17,7 +17,7 @@ class SurveyController {
 
     await surveyRepository.save(newSurvey);
 
-    return res.json(newSurvey);
+    return res.status(201).json(newSurvey);
   }
 
   async get(req: Request, res: Response) {
