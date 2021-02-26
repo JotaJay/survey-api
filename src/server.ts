@@ -6,10 +6,6 @@ import { router } from "./routes";
 const app = express();
 const port = 3333;
 
-app.get("/users", (request, response) => {
-  return response.json({ message: "Hello World" });
-});
-
 app.use(express.json());
 app.use(router);
 

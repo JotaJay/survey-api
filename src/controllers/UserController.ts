@@ -23,6 +23,16 @@ class UserController {
 
     return res.json(user);
   }
+
+  async get(req: Request, res: Response) {
+    const usersRepository = getCustomRepository(UsersRepository);
+
+    const users = await usersRepository.find();
+
+    if (!users) return res.status(400).json({ error: "No users found" });
+
+    return res.json(users);
+  }
 }
 
 export { UserController };
