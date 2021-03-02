@@ -23,6 +23,20 @@ class SurveyController {
   async get(req: Request, res: Response) {
     const surveyRepository = getCustomRepository(SurveysRepository);
 
+    const { id } = req.params;
+
+    const survey = await surveyRepository.findOne({ id });
+
+    if (!survey) {
+      return res.status(400).json({ error: "No survey found" });
+    }
+
+    return res.json(survey);
+  }
+
+  async getAll(req: Request, res: Response) {
+    const surveyRepository = getCustomRepository(SurveysRepository);
+
     const surveys = await surveyRepository.find();
 
     if (!surveys) return res.status(400).json({ error: "No surveys found" });

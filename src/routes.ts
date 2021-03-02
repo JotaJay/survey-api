@@ -12,7 +12,8 @@ router.get("/users", userController.get);
 router.post("/users", userController.create);
 
 //Surveys
-router.get("/surveys", surveyController.get);
+router.get("/surveys/:id", surveyController.get);
+router.get("/surveys", surveyController.getAll);
 router.post("/surveys", surveyController.create);
 
 export { router };
