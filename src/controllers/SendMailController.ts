@@ -1,9 +1,11 @@
 import { Request, Response } from "express";
 import { getCustomRepository } from "typeorm";
+import { resolve } from "path";
 
 import { UsersRepository } from "../repositories/UsersRepository";
 import { SurveysRepository } from "../repositories/SurveysRepository";
 import { SurveysUsersRepository } from "../repositories/SurveysUsersRepository";
+import SendMailService from "../services/SendMailService";
 
 class SendMailController {
   async execute(req: Request, res: Response) {
@@ -31,6 +33,16 @@ class SendMailController {
     });
 
     await surveysUsersRepository.save(surveyUser);
+
+    const npsPath = resolve(__dirname, "..", "views", "emails", "npsMail.hbs");
+
+    const variables = {
+      name: user.name,
+      title: survey.title,
+      description: survey.description,
+    };
+
+    await SendMailService.execute(email, variables, npsPath);
 
     res.status(201).json(surveyUser);
   }
