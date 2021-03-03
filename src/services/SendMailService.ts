@@ -6,6 +6,8 @@ interface Variables {
   name: string;
   title: string;
   description: string;
+  user_id: string;
+  link: string;
 }
 
 class SendMailService {
