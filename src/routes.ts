@@ -20,5 +20,6 @@ router.post("/surveys", surveyController.create);
 
 //Mail
 router.post("/sendmail", sendMailController.execute);
+router.get("/sendmail/delete", sendMailController.deleteAll);
 
 export { router };
